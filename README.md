@@ -7,7 +7,7 @@
 ## Team Members
 - **Tanush Vijayakumar Savadi** ([tanushsavadi](https://github.com/tanushsavadi))
 - **Ayush Ravi Chandran** ([Espiobest](https://github.com/Espiobest))
-- **Ipsita** ([Ippyb] (https://github.com/Ippyb))
+- **Ipsita** ((https://github.com/Ippyb))
 - Ian
 
 ## Brief Overview of the Application
