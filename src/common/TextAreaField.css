@@ -1,0 +1,12 @@
+.textarea-field {
+  display: block;
+  padding: 1em;
+  border: 1px solid #2b2b2b;
+  border-radius: 4px;
+  background-color: #2b2b2b;
+  max-height: 30vh;
+}
+
+.textarea-field:focus {
+  outline: 1px solid #888888; /* keeps the same border color on focus */
+}
