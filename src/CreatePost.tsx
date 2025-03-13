@@ -1,67 +1,46 @@
 import React from 'react';
 import InputField from './common/InputField.tsx';
+import SelectField from './common/SelectField.tsx';
 import TextAreaField from './common/TextAreaField.tsx';
+import './CreatePost.css';
 
 interface CreatePostProps {
 	onClose: () => void;
 }
 
-const overlayStyle: React.CSSProperties = {
-	position: 'fixed',
-	top: 0,
-	left: 0,
-	width: '100%',
-	height: '100%',
-	backgroundColor: 'rgba(0,0,0,0.5)',
-	display: 'flex',
-	justifyContent: 'center',
-	alignItems: 'center',
-};
-
-const contentStyle: React.CSSProperties = {
-  position: 'relative',
-  display: 'flex',
-  flexDirection: 'column',
-	backgroundColor: '#242424',
-	padding: '2em',
-	borderRadius: '20px',
-	maxWidth: '500px',
-	width: '100%',
-  justifyContent: 'center',
-  alignItems: 'center',
-};
-
-const formStyle: React.CSSProperties = {
-	display: 'flex',
-	flexDirection: 'column',
-	gap: '1em',
-  justifyContent: 'center',
-  width: '100%',
-};
-
-const closeButtonStyle: React.CSSProperties = {
-  position: 'absolute',
-  top: '1.25em',
-  right: '1.25em',
-  padding: '0.25em 0.5em',
-  backgroundColor:'#550000',
-  border: 'none',
-  color: '#fff',
-  fontSize: '1.5em',
-  cursor: 'pointer',
-};
+const maxPassengerOptions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'];
 
 const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
 
+  const [rideType, setRideType] = React.useState<'offer' | 'request'>('offer');
+
 	return (
-		<div style={overlayStyle}>
-			<div style={contentStyle}>
+		<div className="overlay">
+			<div className="content">
         
-				<button style={closeButtonStyle} onClick={onClose}>X</button>
-				<h2 style={{ marginTop: '0' }}>Create Post</h2>
-				<form style={formStyle}>
+				<button className="close-button" onClick={onClose}>X</button>
+				<h2 style={{ marginTop: '0', marginBottom: '1.25em' }}>Create Post</h2>
+				<form className="form">
+
+          <div className="offer-request-container">
+            <input type="radio" id="offer" name="ride-type" defaultChecked className="ride-type-input" />
+            <label className="offer-request-tab" htmlFor="offer">
+              Offering a Ride
+            </label>
+            <input type="radio" id="request" name="ride-type" className="ride-type-input" />
+            <label className="offer-request-tab" htmlFor="request">
+              Requesting a Ride
+            </label>
+          </div>
           
           <InputField label="Title:" type="text" required/>
+
+          <div style={{display: 'flex', gap: '1em', justifyContent: 'space-between', width: '100%'}}>
+            <InputField label="Pets Allowed" type="checkbox" required/>
+            <SelectField label="Max Passengers" options={maxPassengerOptions} required/>
+            <InputField label="Same Gender" type="checkbox" required/>
+          </div>
+
 					<TextAreaField label="Content:" required/>
 
 					<button style={{marginTop: '1em'}} type="submit">Post</button>
