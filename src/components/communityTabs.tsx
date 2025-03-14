@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./communityTabs.css";
-import createPostIcon from "./assets/createPost.png"; 
+import "../styling/communityTabs.css";
+import createPostIcon from "../assets/createPost.png"; 
 import CreatePost from "./CreatePost";
 
 const SimpleTabs: React.FC = () => {
@@ -18,7 +18,7 @@ const SimpleTabs: React.FC = () => {
           className={`tab ${activeTab === "offers" ? "active" : ""}`}
           onClick={() => setActiveTab("offers")}
         >
-          <span>Offers</span>
+          <span>Offers  </span>
           <button className="create-post-button" onClick={handleShowCreatePost}>
             <img
               src={createPostIcon}
@@ -31,7 +31,7 @@ const SimpleTabs: React.FC = () => {
           className={`tab ${activeTab === "requests" ? "active" : ""}`}
           onClick={() => setActiveTab("requests")}
         >
-          <span>Requests</span>
+          <span>Requests  </span>
           <button className="create-post-button" onClick={handleShowCreatePost}>
             <img
               src={createPostIcon}

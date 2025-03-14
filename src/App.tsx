@@ -1,49 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import CreatePost from './CreatePost'
-import SimpleTabs from './communityTabs'
-import './App.css'
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import "./App.css";
+import Community from "./pages/community"; // Import the Community component
 
-function App() {
-  const [showCreatePost, setShowCreatePost] = useState(false)
-  const [showTabs, setShowTabs] = useState(false)
-
-  const handleShowCreatePost = () => {
-    setShowCreatePost(!showCreatePost)
-  }
-
-  const toggleTabs = () => {
-    setShowTabs(!showTabs)
-  }
-
+function Home() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={handleShowCreatePost}>Create Post</button>
-        <button onClick={toggleTabs} style={{ marginLeft: '10px' }}>
-          {showTabs ? 'Hide Tabs' : 'Show Tabs'}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      {showCreatePost && <CreatePost onClose={handleShowCreatePost} />}
-      {showTabs && <SimpleTabs />}
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <h2>Home Page</h2>
+      <p>Welcome to the home page!</p>
+    </div>
+  );
 }
 
-export default App
+function Profile() {
+  return (
+    <div>
+      <h2>Profile Page</h2>
+      <p>Welcome to the profile page!</p>
+    </div>
+  );
+}
+
+function App() {
+
+  return (
+    <Router>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/community">Community</Link>
+          </li>
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
+        </ul>
+      </nav>
+
+      {/* Define routes */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/community" element={<Community />} />{" "}
+        {/* Update the route for the Community page */}
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;

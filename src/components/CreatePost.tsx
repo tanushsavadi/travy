@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import InputField from "./common/InputField.tsx";
-import SelectField from "./common/SelectField.tsx";
-import TextAreaField from "./common/TextAreaField.tsx";
-import "./CreatePost.css";
+import InputField from "../common/InputField.tsx";
+import SelectField from "../common/SelectField.tsx";
+import TextAreaField from "../common/TextAreaField.tsx";
+import "../styling/CreatePost.css";
 
 interface CreatePostProps {
   onClose: () => void;
