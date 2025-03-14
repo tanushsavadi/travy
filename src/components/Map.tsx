@@ -12,40 +12,53 @@ const MapContainerCSS: React.CSSProperties = {
 };
 
 
-const ResetButton: React.FC = () => {
-    const map = useMap();
-
-    const resetMap = () => {
-        if (map) {
-            map.setView(UMassCoords, 12); // Reset coordinates
-        }
-    }
-
-    return (
-        <button onClick={resetMap} style={{ position: 'absolute', bottom: '10px', right: '10px', zIndex: 1000 }}>
-            Reset Map
-        </button>
-    );
+interface MapProps {
+    destination?: LatLngTuple;
+    setDestination?: React.Dispatch<React.SetStateAction<LatLngTuple | undefined>>;
 }
 
 
-const MyMap: React.FC = () => {
+const MyMap: React.FC<MapProps> = ({destination, setDestination}) => {
+
+    const ResetButton: React.FC = () => {
+        const map = useMap();
+    
+        const resetMap = () => {
+            if (map) {
+                map.setView(UMassCoords, 12); // Reset coordinates
+                if (setDestination) setDestination(undefined); // Reset destination
+            }
+        }
+    
+        return (
+            <button onClick={resetMap} style={{ position: 'absolute', bottom: '10px', right: '10px', zIndex: 1000 }}>
+                Reset Map
+            </button>
+        );
+    }
 
     return (
         <div>
-        <MapContainer center={UMassCoords} zoom={12} scrollWheelZoom={true} style={MapContainerCSS}>
-            <TileLayer
-                url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-            />
-            <ResetButton />
-            <Marker position={UMassCoords}>
-                <Popup>
-                    UMass Amherst
-                </Popup>
-            </Marker>
-        </MapContainer>
-      </div>
-  )
+            <MapContainer center={UMassCoords} zoom={12} scrollWheelZoom={true} style={MapContainerCSS}>
+                <TileLayer
+                    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                />
+                <ResetButton />
+                <Marker position={UMassCoords}>
+                    <Popup>
+                        UMass Amherst
+                    </Popup>
+                </Marker>
+                {destination && (
+                    <Marker position={destination}>
+                        <Popup>
+                            Destination
+                        </Popup>
+                    </Marker>
+                )}
+            </MapContainer>
+        </div>
+    )
 }
 
 export default MyMap;
