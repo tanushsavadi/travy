@@ -67,8 +67,9 @@ const Filter: React.FC<FilterProps> = ({filters, setFilters}) => {
                 </div>
                 )
             )}
+            <br></br>
             <label htmlFor="price" style={{ marginRight: '0.5em' }}>Price:</label>
-            <br/>
+            <br></br>
             <Slider
                 value={values}
                 onChange={(event, newValue) => 
