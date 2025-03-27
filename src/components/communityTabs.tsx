@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import "../styling/communityTabs.css";
+import "../styling/CommunityTabs.css";
 import createPostIcon from "../assets/createPost.png"; 
 import CreatePost from "./CreatePost";
+import SearchBar from "./SearchBar";
+import ListedPost from "./ListedPost";
 
 const SimpleTabs: React.FC = () => {
+
   const [activeTab, setActiveTab] = useState<"offers" | "requests">("offers");
   const [showCreatePost, setShowCreatePost] = useState(false);
 
@@ -13,6 +16,7 @@ const SimpleTabs: React.FC = () => {
 
   return (
     <div className="tabs-container">
+
       <div className="tabs-header">
         <div
           className={`tab ${activeTab === "offers" ? "active" : ""}`}
@@ -41,10 +45,21 @@ const SimpleTabs: React.FC = () => {
           </button>
         </div>
       </div>
-      <div className="tab-content"></div>
+
+      <SearchBar />
+
+      <div className="tab-content">
+
+        <ListedPost />
+        <ListedPost />
+        <ListedPost />
+
+      </div>
+
       {showCreatePost && (
         <CreatePost onClose={handleShowCreatePost} activeTab={activeTab} />
       )}
+      
     </div>
   );
 };

@@ -11,8 +11,8 @@ interface CreatePostProps {
 
 const maxPassengerOptions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'];
 
-
 const CreatePost: React.FC<CreatePostProps> = ({ onClose, activeTab }) => {
+
   const [rideType, setRideType] = React.useState<"offer" | "request">("offer");
 
   // Update rideType based on activeTab
@@ -27,11 +27,15 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose, activeTab }) => {
   return (
     <div className="overlay">
       <div className="content">
+
         <button className="close-button" onClick={onClose}>
           X
         </button>
+
         <h2 style={{ marginTop: "0", marginBottom: "1.25em" }}>Create Post</h2>
+
         <form className="form">
+          
           <div className="offer-request-container">
             <input
               type="radio"
@@ -81,7 +85,9 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose, activeTab }) => {
           <button style={{ marginTop: "1em" }} type="submit">
             Post
           </button>
+
         </form>
+      
       </div>
     </div>
   );

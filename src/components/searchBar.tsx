@@ -23,6 +23,7 @@ const SearchBar: React.FC = () => {
           className="search-input"
           onKeyPress={(e) => e.key === "Enter" && handleSearch()}
         />
+        <button className="search-button">🔍</button>
       </div>
     </div>
   );

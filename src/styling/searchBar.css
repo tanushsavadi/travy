@@ -2,22 +2,27 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 40px;
 }
 
 .search-bar {
-  position: relative;
   display: flex;
+  flex-direction: row;
+  gap: 0.5em;
   align-items: center;
   width: 100%;
 }
 
 .search-input {
-  padding: 8px 40px 8px 12px;  
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 1em;  
+  font-size: 1.1em;
+  border: none;
+  border-radius: 0.5em;
   width: 100%;
 }
 
+.search-button {
+  padding: 1em;
+  font-size: 1.1em;
+  background: none;
+  cursor: pointer;
+}

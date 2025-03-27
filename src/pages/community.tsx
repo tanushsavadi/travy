@@ -1,12 +1,10 @@
 import React from "react";
-import "../styling/community.css"
-import SimpleTabs from "../components/communityTabs";
-import SearchBar from "../components/searchBar";
+import SimpleTabs from "../components/CommunityTabs";
 
-const Community = () => {
+const Community: React.FC = () => {
   return (
     <div>
-      <SearchBar />
+      <h1>Community</h1>
       <SimpleTabs />
     </div>
   );

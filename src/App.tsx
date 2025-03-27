@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
-import Community from "./pages/community"; // Import the Community component
+import Community from "./pages/Community"; // Import the Community component
 
 function Home() {
   return (
