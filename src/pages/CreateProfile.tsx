@@ -1,62 +1,56 @@
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUserProfile } from "../context/UserProfileContext";
 import InputField from "../components/InputField";
 import CheckboxGroup from "../components/CheckboxGroup";
 import Button from "../components/Button";
 
 const ProfileSetup: React.FC = () => {
+  const { profile, updateProfile } = useUserProfile();
   const [step, setStep] = useState<number>(1);
-  const [fullName, setFullName] = useState<string>("");
-  const [university, setUniversity] = useState<string>("");
-  const [transportModes, setTransportModes] = useState<string[]>([]);
-  const [budget, setBudget] = useState<string>("");
-  const [frequentDestinations, setFrequentDestinations] = useState<string[]>([""]);
-  const [ridesharePreference, setRidesharePreference] = useState<string[]>([]);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const navigate = useNavigate();
 
   const handleDestinationChange = (index: number, value: string) => {
-    const newDestinations = [...frequentDestinations];
+    const newDestinations = [...profile.destinations];
     newDestinations[index] = value;
-    setFrequentDestinations(newDestinations);
+    updateProfile({ destinations: newDestinations });
   };
 
   const addDestinationField = () => {
-    setFrequentDestinations([...frequentDestinations, ""]);
+    updateProfile({ destinations: [...profile.destinations, ""] });
   };
 
-  // **Validation for Each Step**
   const validateStep = () => {
     const newErrors: { [key: string]: string } = {};
 
     if (step === 1) {
-      if (fullName.length < 3) newErrors.fullName = "Full Name must be at least 3 characters";
-      if (university.length < 3) newErrors.university = "Please enter your university";
+      if (!profile.fullName || profile.fullName.length < 3)
+        newErrors.fullName = "Full Name must be at least 3 characters";
+      if (!profile.university || profile.university.length < 3)
+        newErrors.university = "Please enter your university";
     } else if (step === 2) {
-      if (!budget || isNaN(Number(budget)) || Number(budget) <= 0) newErrors.budget = "Please enter a valid budget amount";
-    }
+      if (!profile.budget || isNaN(Number(profile.budget)) || Number(profile.budget) <= 0)
+        newErrors.budget = "Please enter a valid budget amount";
+    } 
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // **Step Navigation**
   const nextStep = () => {
-    if (validateStep()) {
-      setStep(step + 1);
-    }
+    if (validateStep()) setStep((prev) => prev + 1);
   };
 
   const prevStep = () => {
-    setStep(step - 1);
+    setStep((prev) => prev - 1);
   };
 
   const handleProfileSetup = (e: FormEvent) => {
     e.preventDefault();
-
     if (!validateStep()) return;
 
-    console.log("Profile Saved:", { fullName, university, transportModes, budget, frequentDestinations, ridesharePreference });
+    console.log("Profile Saved:", profile);
     navigate("/dashboard");
   };
 
@@ -69,20 +63,19 @@ const ProfileSetup: React.FC = () => {
           {/* Step 1: Basic Info */}
           {step === 1 && (
             <>
-              <InputField 
-                label="Full Name" 
-                type="text" 
-                value={fullName} 
-                onChange={(e) => setFullName(e.target.value)} 
+              <InputField
+                label="Full Name"
+                type="text"
+                value={profile.fullName}
+                onChange={(e) => updateProfile({ fullName: e.target.value })}
                 placeholder="John Doe"
                 error={errors.fullName}
               />
-
-              <InputField 
-                label="University" 
-                type="text" 
-                value={university} 
-                onChange={(e) => setUniversity(e.target.value)} 
+              <InputField
+                label="University"
+                type="text"
+                value={profile.university}
+                onChange={(e) => updateProfile({ university: e.target.value })}
                 placeholder="University Name"
                 error={errors.university}
               />
@@ -92,66 +85,69 @@ const ProfileSetup: React.FC = () => {
           {/* Step 2: Preferences */}
           {step === 2 && (
             <>
-              <CheckboxGroup 
-                label="Preferred Transport Modes" 
+              <CheckboxGroup
+                label="Preferred Transport Modes"
                 options={["Bus", "Train", "Flight", "Carpool"]}
-                selected={transportModes} 
-                setSelected={setTransportModes}
+                selected={profile.transportModes}
+                setSelected={(modes) => updateProfile({ transportModes: modes })}
               />
 
-              <InputField 
-                label="Budget (in USD)" 
-                type="number" 
-                value={budget} 
-                onChange={(e) => setBudget(e.target.value)} 
+              <InputField
+                label="Budget (in USD)"
+                type="number"
+                value={profile.budget}
+                onChange={(e) => updateProfile({ budget: e.target.value })}
                 placeholder="Enter your budget"
                 error={errors.budget}
               />
 
               <div>
-                <label className="block text-white text-sm font-medium mb-2">Frequent Travel Destinations</label>
-                {frequentDestinations.map((destination, index) => (
-                  <InputField 
-                    key={index}
-                    label="" 
-                    type="text" 
-                    value={destination} 
-                    onChange={(e) => handleDestinationChange(index, e.target.value)} 
+                <label className="block text-white text-sm font-medium mb-2">
+                  Frequent Travel Destinations
+                </label>
+                {profile.destinations.map((dest, idx) => (
+                  <InputField
+                    key={idx}
+                    label=""
+                    type="text"
+                    value={dest}
+                    onChange={(e) => handleDestinationChange(idx, e.target.value)}
                     placeholder="Enter destination"
                   />
                 ))}
-                <button type="button" onClick={addDestinationField} className="text-white text-sm mt-2 underline">
+                <button
+                  type="button"
+                  onClick={addDestinationField}
+                  className="text-white text-sm mt-2 underline"
+                >
                   + Add Another Destination
                 </button>
               </div>
             </>
+
           )}
 
-          {/* Step 3: Rideshare Settings */}
+          {/* Step 3: Rideshare Preferences */}
           {step === 3 && (
             <>
-              <CheckboxGroup 
-                label="Rideshare Preferences" 
+              <CheckboxGroup
+                label="Rideshare Preferences"
                 options={["Willing to drive", "Only want a ride", "Flexible"]}
-                selected={ridesharePreference} 
-                setSelected={setRidesharePreference}
+                selected={profile.ridesharePreference}
+                setSelected={(prefs) => updateProfile({ ridesharePreference: prefs })}
               />
             </>
           )}
 
           {/* Navigation Buttons */}
           <div className="flex justify-between gap-4">
-  {step > 1 && (
-    <Button text="Back" type="button" onClick={prevStep} />
-  )}
-
-  {step < 3 ? (
-    <Button text="Next" type="button" onClick={nextStep} />
-  ) : (
-    <Button text="Save & Continue" type="submit" />
-  )}
-</div>
-
+            {step > 1 && <Button text="Back" type="button" onClick={prevStep} />}
+            {step < 4 ? (
+              <Button text="Next" type="button" onClick={nextStep} />
+            ) : (
+              <Button text="Save & Continue" type="submit" />
+            )}
+          </div>
         </form>
       </div>
     </div>
