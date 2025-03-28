@@ -1,31 +1,38 @@
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import { useAuth } from "@/context/AuthContext";
+import dummyUserProfiles from "../data/dummyUserProfile";
 
 const LoginPage: React.FC = () => {
+    const { login } = useAuth();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const navigate = useNavigate();
 
-  const validateEmail = (email: string) => /^[a-zA-Z0-9._%+-]+@umass\.edu$/.test(email);
-  const validatePassword = (password: string) => password.length >= 8;
-
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();
-
+  
     const newErrors: { email?: string; password?: string } = {};
-    if (!validateEmail(email)) newErrors.email = "Email must be a valid @umass.edu address";
-    if (!validatePassword(password)) newErrors.password = "Password must be at least 8 characters long";
-
-    if (Object.keys(newErrors).length > 0) {
+  
+    const matchedUser = dummyUserProfiles.find(
+      (user) => user.email === email && user.password === password
+    );
+  
+    if (!matchedUser) {
+      newErrors.email = "Invalid email or password";
       setErrors(newErrors);
       return;
     }
-
-    setErrors({});
-    console.log("Logging in with:", email, password);
-    navigate("/profile-setup");
+  
+    // Login user and store data
+    login(matchedUser.email);
+  
+    // Optionally store user profile globally/localStorage
+    localStorage.setItem("userProfile", JSON.stringify(matchedUser));
+  
+    navigate("/dashboard");
   };
 
   return (

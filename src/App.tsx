@@ -3,9 +3,11 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import CreateProfile from "./pages/CreateProfile";
 import { UserProfileProvider } from "./context/UserProfileContext";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
+    <AuthProvider>
     <UserProfileProvider>
       <Router>
         <Routes>
@@ -16,6 +18,7 @@ function App() {
         </Routes>
       </Router>
     </UserProfileProvider>
+    </AuthProvider>
   );
 }
 
