@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserProfile } from "../context/UserProfileContext";
 import InputField from "../components/InputField";
@@ -37,6 +37,16 @@ const ProfileSetup: React.FC = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
+  useEffect(() => {
+    const storedProfile = localStorage.getItem("userProfile");
+    if (storedProfile) {
+      const { email, password } = JSON.parse(storedProfile);
+      if (email && password && (!profile.email || !profile.password)) {
+        updateProfile({ email, password });
+      }
+    }
+  });
 
   const nextStep = () => {
     if (validateStep()) setStep((prev) => prev + 1);

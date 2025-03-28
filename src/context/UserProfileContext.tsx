@@ -7,11 +7,14 @@ type UserProfile = {
   budget: string;
   destinations: string[];
   ridesharePreference: string[];
+  email: string;
+  password: string;
 };
 
 type ProfileContextType = {
   profile: UserProfile;
   updateProfile: (updates: Partial<UserProfile>) => void;
+  resetProfile: () => void;
 };
 
 const defaultProfile: UserProfile = {
@@ -21,6 +24,8 @@ const defaultProfile: UserProfile = {
   budget: "",
   destinations: [""],
   ridesharePreference: [],
+  email: "",
+  password: "",
 };
 
 const UserProfileContext = createContext<ProfileContextType | undefined>(undefined);
@@ -39,8 +44,13 @@ export const UserProfileProvider: React.FC<{ children: React.ReactNode }> = ({ c
     setProfile((prev) => ({ ...prev, ...updates }));
   };
 
+  const resetProfile = () => {
+    setProfile(defaultProfile);
+    localStorage.setItem("userProfile", JSON.stringify(defaultProfile));
+  };
+
   return (
-    <UserProfileContext.Provider value={{ profile, updateProfile }}>
+    <UserProfileContext.Provider value={{ profile, updateProfile, resetProfile }}>
       {children}
     </UserProfileContext.Provider>
   );

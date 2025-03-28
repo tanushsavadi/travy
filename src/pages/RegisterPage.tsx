@@ -26,27 +26,35 @@ const RegisterPage: React.FC = () => {
 
   const handleRegister = (e: FormEvent) => {
     e.preventDefault();
-
+  
     const newErrors: { email?: string; password?: string; confirmPassword?: string } = {};
     if (!validateEmail(email)) newErrors.email = "Email must be a valid @umass.edu address";
     if (!validatePassword(password)) newErrors.password = "Password must be at least 8 characters long";
     if (!validateConfirmPassword(password, confirmPassword)) newErrors.confirmPassword = "Passwords do not match";
-
+  
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-
+  
     setErrors({});
     console.log("Registering with:", email, password);
-
-    // Clear stored data when successfully registering
+  
+    const existingProfile = localStorage.getItem("userProfile");
+    const updatedProfile = {
+      ...(existingProfile ? JSON.parse(existingProfile) : {}),
+      email,
+      password,
+    };
+    localStorage.setItem("userProfile", JSON.stringify(updatedProfile));
+  
     localStorage.removeItem("register_email");
     localStorage.removeItem("register_password");
     localStorage.removeItem("register_confirmPassword");
-
+  
     navigate("/profile-setup");
   };
+  
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-black px-6">

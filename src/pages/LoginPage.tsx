@@ -2,10 +2,12 @@ import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import { useAuth } from "@/context/AuthContext";
+import { useUserProfile } from "@/context/UserProfileContext";
 import dummyUserProfiles from "../data/dummyUserProfile";
 
 const LoginPage: React.FC = () => {
-    const { login } = useAuth();
+  const { login } = useAuth();
+  const { updateProfile } = useUserProfile();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
@@ -13,25 +15,30 @@ const LoginPage: React.FC = () => {
 
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();
-  
     const newErrors: { email?: string; password?: string } = {};
-  
-    const matchedUser = dummyUserProfiles.find(
+
+    const storedData = localStorage.getItem("userProfile");
+    const savedUser = storedData ? JSON.parse(storedData) : null;
+    const matchesLocalUser = savedUser?.email === email && savedUser?.password === password;
+
+    const matchedDummyUser = dummyUserProfiles.find(
       (user) => user.email === email && user.password === password
     );
-  
-    if (!matchedUser) {
+
+    if (!matchesLocalUser && !matchedDummyUser) {
       newErrors.email = "Invalid email or password";
       setErrors(newErrors);
       return;
     }
-  
-    // Login user and store data
-    login(matchedUser.email);
-  
-    // Optionally store user profile globally/localStorage
-    localStorage.setItem("userProfile", JSON.stringify(matchedUser));
-  
+
+    login(email);
+
+    const finalProfile = matchedDummyUser || savedUser;
+    if (finalProfile) {
+      localStorage.setItem("userProfile", JSON.stringify(finalProfile));
+      updateProfile(finalProfile);
+    }
+
     navigate("/home");
   };
 
@@ -70,11 +77,12 @@ const LoginPage: React.FC = () => {
           </div>
 
           <p className="text-left text-white text-sm mt-6">
-  Forgot your password?{" "}
-  <a href="/forgot-password" className="text-white font-semibold hover:underline transition">
-    Reset it here
-  </a>
-</p>
+            Forgot your password?{" "}
+            <a href="/forgot-password" className="text-white font-semibold hover:underline transition">
+              Reset it here
+            </a>
+          </p>
+
           <Button text="Login" type="submit" />
         </form>
 
