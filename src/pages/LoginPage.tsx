@@ -32,7 +32,7 @@ const LoginPage: React.FC = () => {
     // Optionally store user profile globally/localStorage
     localStorage.setItem("userProfile", JSON.stringify(matchedUser));
   
-    navigate("/dashboard");
+    navigate("/home");
   };
 
   return (

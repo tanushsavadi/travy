@@ -51,7 +51,7 @@ const ProfileSetup: React.FC = () => {
     if (!validateStep()) return;
 
     console.log("Profile Saved:", profile);
-    navigate("/dashboard");
+    navigate("/home");
   };
 
   return (
