@@ -57,13 +57,13 @@ const Home: React.FC = () => {
           disablePortal
           options={locationNames}
           sx={{
-            width: 300, margin: '0 auto', padding: 0, textColor: 'white',
+            width: 300, margin: '0 auto', padding: 0, textColor: 'white', marginBottom: '0.75rem',
             '& label': { color: 'white' },
             '& label.Mui-focused': { color: 'white' },
             '.MuiAutocomplete-input': { color: 'white' },
             '.MuiSvgIcon-root': { color: '#7ac59b' },
           }}
-          className="input-field"
+          className="input-field mb-2"
           renderInput={(params) => <TextField {...params} label="Enter Location" />}
           onChange={(e, value) => setInputValue(value || '')}
         />
