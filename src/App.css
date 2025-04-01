@@ -1,6 +1,5 @@
 #root {
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -38,4 +37,15 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.submit-btn {
+  background-color: #242424;
+  color: #fff;
+  padding: 0.25em 0.5em;
+  border-radius: 4px;
+  border: 1px solid white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0.5em 0;
 }

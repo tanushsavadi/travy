@@ -1,4 +1,4 @@
-type DummyProfile = {
+export type DummyProfile = {
     fullName: string;
     email: string;
     password: string;
