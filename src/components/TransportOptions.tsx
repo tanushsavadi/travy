@@ -37,7 +37,7 @@ const TransportOptions: React.FC<TransportOptionsProps> = ({filters}) => {
     return (
             filters.location !== '' && (
                 <div className="transport-options">
-                <h3>Available Transport Options</h3>
+                <h3 className="pb-1 font-semibold">Available Transport Options</h3>
                 {filteredData.length > 0 ? (
                     <ul className="rides-list">
                     {filteredData.map((option, index) => (

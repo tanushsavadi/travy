@@ -9,7 +9,7 @@ import { mockLocations } from "../data/MockLocations";
 const UMassCoords: LatLngTuple = [42.386487, -72.531481]; // UMass Amherst coordinates
 
 const MapContainerCSS: React.CSSProperties = {
-    height: "400px",
+    height: "300px",
     width: "1000px",
     zIndex: 0
 };
@@ -60,7 +60,7 @@ const MyMap: React.FC<MapProps> = ({ destination, setDestination }) => {
         };
 
         return (
-            <button onClick={resetMap} style={{ color: 'black', position: 'absolute', bottom: '10px', right: '10px', zIndex: 1000, cursor: 'pointer' }}>
+            <button onClick={resetMap} style={{ color: 'black', position: 'absolute', bottom: '10px', right: '110px', zIndex: 1000, cursor: 'pointer' }}>
                 Reset Map
             </button>
         );

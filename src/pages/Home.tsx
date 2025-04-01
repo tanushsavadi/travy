@@ -44,18 +44,20 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="text-white h-screen flex flex-col items-center justify-center">
-      <Map destination={destination} setDestination={setDestination}/>
-      <div>
+    <div className="text-white flex flex-col items-center justify-center h-screen">
+      <div style={{ position: 'relative', height: '300px', overflow: 'hidden', width: '60%', margin: 'auto' }}>
+        <Map destination={destination} setDestination={setDestination} />
+      </div>
+      <div style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 300px)', width: '80%', margin: '0 auto', padding: '1rem', textAlign: 'center' }}>
         {currentUser && 
-        <h1 className="text-3xl font-bold mb-4">Welcome {currentUser.fullName}</h1>
+          <h1 className="text-3xl font-bold mb-4">Welcome {currentUser.fullName}</h1>
         }
         <p className="mb-4">Enter your destination to find rides!</p>
         <Autocomplete
           disablePortal
           options={locationNames}
-            sx={{
-             width: 300, margin: 'auto', padding: 0, textColor: 'white',
+          sx={{
+            width: 300, margin: '0 auto', padding: 0, textColor: 'white',
             '& label': { color: 'white' },
             '& label.Mui-focused': { color: 'white' },
             '.MuiAutocomplete-input': { color: 'white' },
@@ -65,11 +67,14 @@ const Home: React.FC = () => {
           renderInput={(params) => <TextField {...params} label="Enter Location" />}
           onChange={(e, value) => setInputValue(value || '')}
         />
-        <Filter filters={filters} setFilters={setFilters}/>
-        <button className="submit-btn" onClick={handleSubmit}>Submit</button> 
-
-        <TransportOptions filters={filters}/>
-      </div>   
+        <div style={{ margin: 'auto', width: '100%', maxWidth: '600px' }}>
+          <Filter filters={filters} setFilters={setFilters} />
+        </div>
+        <button className="submit-btn" onClick={handleSubmit} style={{ margin: '1rem auto' }}>Submit</button>
+        <div style={{ margin: '1rem auto', width: '100%', maxWidth: '600px' }}>
+          <TransportOptions filters={filters} />
+        </div>
+      </div>
     </div>
   )
 }

@@ -59,9 +59,6 @@ const Filter: React.FC<FilterProps> = ({ filters, setFilters }) => {
 
   return (
     <div style={{ marginBottom: "1em" }}>
-      <label htmlFor="filter" style={{ marginRight: "0.5em" }}>
-        Filters:
-      </label>
 
       <div className="filter-container">
         {options.map((option) => (
