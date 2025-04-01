@@ -3,6 +3,7 @@ import Map from '../components/Map';
 import Filter from '../components/Filter';
 import TransportOptions from '../components/TransportOptions';
 import '../common/InputField.css';
+import { useNavigate } from "react-router-dom";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { mockLocations } from '../data/MockLocations';
@@ -16,7 +17,12 @@ interface FilterOptions {
 }
 
 const Home: React.FC = () => {
+  const currentUser: DummyProfile = JSON.parse(localStorage.getItem('userProfile') || '{}');
+  const navigate = useNavigate();
 
+  if (!currentUser) {
+    navigate('/login');
+  }
   const locationNames = mockLocations.map(location => location.name);
 
   const [destination, setDestination] = React.useState<string>('');
@@ -28,7 +34,6 @@ const Home: React.FC = () => {
     travelTime: { minHours: 0, maxHours: 24 }
   });
 
-  const currentUser: DummyProfile = JSON.parse(localStorage.getItem('userProfile') || '{}');
 
   const handleSubmit = () => {
     const loc = inputValue;
@@ -44,6 +49,7 @@ const Home: React.FC = () => {
   };
 
   return (
+    // TODO: Add logout button
     <div className="text-white flex flex-col items-center justify-center h-screen">
       <div style={{ position: 'relative', height: '300px', overflow: 'hidden', width: '60%', margin: 'auto' }}>
         <Map destination={destination} setDestination={setDestination} />
