@@ -16,10 +16,12 @@ const LoginPage: React.FC = () => {
   useEffect(() => {
     const storedUser = localStorage.getItem("userProfile");
     if (storedUser) {
-      navigate("/home");
+      const parsedUser = JSON.parse(storedUser);
+      if (parsedUser.email && parsedUser.password) {
+        navigate("/home");
+      }
     }
-  }
-  , [navigate]);
+  }, [navigate]);
 
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();
