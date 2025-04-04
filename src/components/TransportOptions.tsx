@@ -25,14 +25,16 @@ const getTransportIcon = (transport: string) => {
 
 const TransportOptions: React.FC<TransportOptionsProps> = ({filters}) => {
 
-    const filteredData: RideOption[] = rideData.filter(item =>
+    const filteredData = React.useMemo(() => {
+      return rideData.filter(item =>
         item.destination === filters.location &&
         filters.transport.includes(item.transport) &&
         item.price >= filters.price.min &&
         item.price <= filters.price.max &&
         item.travelTime >= filters.travelTime.minHours &&
         item.travelTime <= filters.travelTime.maxHours
-    );
+      );
+    }, [filters]);
 
     return (
             filters.location !== '' && (
