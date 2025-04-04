@@ -1,5 +1,5 @@
 import React from "react";
-import SimpleTabs from "../components/CommunityTabs";
+import SimpleTabs from "../components/communityTabs";
 
 const Community: React.FC = () => {
   return (

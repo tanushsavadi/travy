@@ -1,48 +1,127 @@
-import React from 'react';
+import React from "react";
+
+interface ListedPostProps {
+  post: {
+    id: string;
+    user: {
+      name: string;
+      university: string;
+      avatar?: string;
+    };
+    destination: string;
+    requestCount: number;
+    timestamp: Date;
+    content: string;
+  };
+}
 
 const ListedPostContainerCSS: React.CSSProperties = {
-    display: 'flex',
-    padding: '1.5em',
-    background: '#1d1d1d',
-    borderRadius: '1em',
-    fontWeight: 500,
+  display: "flex",
+  padding: "1.5em",
+  background: "#1d1d1d",
+  borderRadius: "1em",
+  fontWeight: 500,
+  marginBottom: "1em",
 };
 
 const ListedPostTextCSS: React.CSSProperties = {
-    color: '#aaa',
-    fontSize: '1em',
-    fontWeight: 300,
-    textAlign: 'start',
-    margin: 0,
-    display: '-webkit-box',
-    WebkitLineClamp: 3,      // limits the text to 3 lines
-    WebkitBoxOrient: 'vertical',
-    overflow: 'hidden'
+  color: "#aaa",
+  fontSize: "1em",
+  fontWeight: 300,
+  textAlign: "start",
+  margin: 0,
+  display: "-webkit-box",
+  WebkitLineClamp: 3,
+  WebkitBoxOrient: "vertical",
+  overflow: "hidden",
 };
 
-// Dummy ListedPost component for demonstration purposes
-const ListedPost: React.FC = () => {
-    return (
-        <div style={ListedPostContainerCSS}>
+const UserAvatar: React.CSSProperties = {
+  width: "40px",
+  height: "40px",
+  borderRadius: "50%",
+  background: "#aaa",
+  marginTop: "0.4em",
+  marginRight: "1em",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: "#1d1d1d",
+  fontWeight: "bold",
+};
 
-            <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#aaa', marginTop: '0.4em', marginRight: '1em' }}></div>
+const ListedPost: React.FC<ListedPostProps> = ({ post }) => {
+  const formattedDate = post.timestamp.toLocaleDateString("en-US", {
+    month: "numeric",
+    day: "numeric",
+    year: "2-digit",
+  });
 
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1em' }}>
+  const formattedTime = post.timestamp
+    .toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })
+    .toLowerCase();
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', color: '#aaa' }}>
-                    <div style={{display: 'flex', gap: '1em', alignItems: 'center' }}>
-                        <span style={{ textAlign: 'start' }}>TOWN | UNI<br />DESTINATION</span>
-                        <span style={{ color: 'green', fontSize: '1.1em' }}>• 100 Requests</span>
-                    </div>
-                    <span style={{ textAlign: 'end' }}>7:56 PM<br />2/1/25</span>
-                </div>
+  const initials = post.user.name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase();
 
-                <p style={ListedPostTextCSS}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            
-            </div>
+  return (
+    <div style={ListedPostContainerCSS}>
+      <div style={UserAvatar}>
+        {post.user.avatar ? (
+          <img
+            src={post.user.avatar}
+            alt={post.user.name}
+            style={{ width: "100%", height: "100%", borderRadius: "50%" }}
+          />
+        ) : (
+          <span>{initials}</span>
+        )}
+      </div>
 
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          gap: "1em",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            color: "#aaa",
+          }}
+        >
+          <div style={{ display: "flex", gap: "1em", alignItems: "center" }}>
+            <span style={{ textAlign: "start" }}>
+              {post.user.university}
+              <br />
+              {post.destination}
+            </span>
+            <span style={{ color: "green", fontSize: "1.1em" }}>
+              • {post.requestCount}{" "}
+              {post.requestCount === 1 ? "Request" : "Requests"}
+            </span>
+          </div>
+          <span style={{ textAlign: "end" }}>
+            {formattedTime}
+            <br />
+            {formattedDate}
+          </span>
         </div>
-    );
+
+        <p style={ListedPostTextCSS}>{post.content}</p>
+      </div>
+    </div>
+  );
 };
 
 export default ListedPost;
