@@ -1,3 +1,5 @@
+import { PREDEFINED_TAGS, TagType } from "../common/Tag.tsx";
+
 export interface ListedPost {
   id: string;
   user: {
@@ -5,6 +7,7 @@ export interface ListedPost {
     name: string;
     university: string;
   };
+  tags: TagType[];
   type: "offer" | "request";
   destination: string;
   requestCount: number;
@@ -19,6 +22,10 @@ export const mockPosts: ListedPost[] = [
       name: "Alex Johnson",
       university: "Boston University",
     },
+    tags: [
+      PREDEFINED_TAGS.LYFT,
+      PREDEFINED_TAGS.CARPOOL
+    ],
     type: "offer",
     destination: "New York City, NY",
     requestCount: 5,
@@ -32,6 +39,9 @@ export const mockPosts: ListedPost[] = [
       name: "Sam Wilson",
       university: "MIT",
     },
+    tags: [
+      PREDEFINED_TAGS.UBER
+    ],
     type: "request",
     destination: "Boston, MA",
     requestCount: 12,
@@ -45,6 +55,9 @@ export const mockPosts: ListedPost[] = [
       name: "Taylor Smith",
       university: "Harvard University",
     },
+    tags: [
+      PREDEFINED_TAGS.CARPOOL
+    ],
     type: "offer",
     destination: "Providence, RI",
     requestCount: 3,
@@ -58,6 +71,9 @@ export const mockPosts: ListedPost[] = [
       name: "Jordan Lee",
       university: "Northeastern University",
     },
+    tags: [
+      PREDEFINED_TAGS.BUS
+    ],
     type: "request",
     destination: "Chicago, IL",
     requestCount: 8,

@@ -1,4 +1,5 @@
 import React from "react";
+import Tag, { TagType } from "../common/Tag.tsx";
 
 interface ListedPostProps {
   post: {
@@ -8,6 +9,8 @@ interface ListedPostProps {
       university: string;
       avatar?: string;
     };
+    tags: TagType[];
+    type: "offer" | "request";
     destination: string;
     requestCount: number;
     timestamp: Date;
@@ -21,7 +24,6 @@ const ListedPostContainerCSS: React.CSSProperties = {
   background: "#1d1d1d",
   borderRadius: "1em",
   fontWeight: 500,
-  marginBottom: "1em",
 };
 
 const ListedPostTextCSS: React.CSSProperties = {
@@ -100,16 +102,19 @@ const ListedPost: React.FC<ListedPostProps> = ({ post }) => {
             color: "#aaa",
           }}
         >
-          <div style={{ display: "flex", gap: "1em", alignItems: "center" }}>
+          <div style={{ display: "flex", gap: "1em", alignItems: 'center' }}>
             <span style={{ textAlign: "start" }}>
               {post.user.university}
               <br />
               {post.destination}
             </span>
-            <span style={{ color: "green", fontSize: "1.1em" }}>
-              • {post.requestCount}{" "}
-              {post.requestCount === 1 ? "Request" : "Requests"}
+            <span style={{ alignItems: 'center', color: 'green', fontSize: "1.1em" }}>
+              • {post.requestCount}{" "}{post.requestCount === 1 ? "Request" : "Requests"}
+
             </span>
+            {post.tags.map((tag) => (
+                <Tag tag={tag} key={tag.name} />
+            ))}
           </div>
           <span style={{ textAlign: "end" }}>
             {formattedTime}

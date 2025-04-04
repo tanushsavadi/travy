@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import InputField from "../common/InputField.tsx";
 import SelectField from "../common/SelectField.tsx";
 import TextAreaField from "../common/TextAreaField.tsx";
+import Tag, { PREDEFINED_TAGS, TagType } from "../common/Tag.tsx";
 import "../styling/CreatePost.css";
 
 interface CreatePostProps {
@@ -28,7 +29,17 @@ const maxPassengerOptions = [
 ];
 
 const CreatePost: React.FC<CreatePostProps> = ({ onClose, activeTab }) => {
+
   const [rideType, setRideType] = React.useState<"offer" | "request">("offer");
+  const [selectedTags, setSelectedTags] = React.useState<string[]>([]);
+
+  const toggleTag = (tagName: string) => {
+    setSelectedTags(prev => 
+      prev.includes(tagName) 
+        ? prev.filter(name => name !== tagName) 
+        : [...prev, tagName]
+    );
+  };
 
   // Update rideType based on activeTab
   useEffect(() => {
@@ -40,67 +51,101 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose, activeTab }) => {
   }, [activeTab]);
 
   return (
-    <div className="overlay">
-      <div className="content">
-        <button className="close-button" onClick={onClose}>
-          X
-        </button>
+		<div className="overlay">
+			<div className="content">
+        
+				<button className="close-button" onClick={onClose}>
+					X
+				</button>
 
-        <h2 style={{ marginTop: "0", marginBottom: "1.25em" }}>Create Post</h2>
+				<h2 style={{ marginTop: '0', marginBottom: '1.25em' }}>
+					Create Post
+				</h2>
 
-        <form className="form">
-          <div className="offer-request-container">
-            <input
-              type="radio"
-              id="offer"
-              name="ride-type"
-              checked={rideType === "offer"}
-              onChange={() => setRideType("offer")}
-              className="ride-type-input"
-            />
-            <label className="offer-request-tab" htmlFor="offer">
-              Offering a Ride
-            </label>
-            <input
-              type="radio"
-              id="request"
-              name="ride-type"
-              checked={rideType === "request"}
-              onChange={() => setRideType("request")}
-              className="ride-type-input"
-            />
-            <label className="offer-request-tab" htmlFor="request">
-              Requesting a Ride
-            </label>
-          </div>
+				<form className="form">
+					<div className="offer-request-container">
+						<input
+							type="radio"
+							id="offer"
+							name="ride-type"
+							checked={rideType === 'offer'}
+							onChange={() => setRideType('offer')}
+							className="ride-type-input"
+						/>
+						<label className="offer-request-tab" htmlFor="offer">
+							Offering a Ride
+						</label>
+						<input
+							type="radio"
+							id="request"
+							name="ride-type"
+							checked={rideType === 'request'}
+							onChange={() => setRideType('request')}
+							className="ride-type-input"
+						/>
+						<label className="offer-request-tab" htmlFor="request">
+							Requesting a Ride
+						</label>
+					</div>
 
-          <InputField label="Title:" type="text" required />
+					<InputField label="Title:" type="text" required />
 
-          <div
-            style={{
-              display: "flex",
-              gap: "1em",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
-            <InputField label="Pets Allowed" type="checkbox" required />
-            <SelectField
-              label="Max Passengers"
-              options={maxPassengerOptions}
-              required
-            />
-            <InputField label="Same Gender" type="checkbox" required />
-          </div>
+          
 
-          <TextAreaField label="Content:" required />
+					<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '1em'}}>
+						<label>Transportation Type:</label>
+						<div style={{ display: 'flex', alignItems: 'middle', gap: '1em'}}>
+							{Object.entries(PREDEFINED_TAGS).map(
+								([tagKey, tag]: [string, TagType]) => (
+									<div
+										key={tagKey}
+										onClick={() => toggleTag(tagKey)}
+										style={{
+											opacity: selectedTags.includes(tagKey) ? 1 : 0.5,
+											cursor: 'pointer'
+										}}
+									>
+										<Tag tag={tag} />
+									</div>
+								)
+							)}
+						</div>
+					</div>
 
-          <button style={{ marginTop: "1em" }} type="submit">
-            Post
-          </button>
-        </form>
-      </div>
-    </div>
+					<div
+						style={{
+							display: 'flex',
+							gap: '1em',
+							justifyContent: 'space-between',
+							width: '100%',
+						}}
+					>
+						<InputField
+							label="Pets Allowed"
+							type="checkbox"
+							required
+						/>
+						<SelectField
+							label="Max Passengers"
+							options={maxPassengerOptions}
+							required
+						/>
+						<InputField
+							label="Same Gender"
+							type="checkbox"
+							required
+						/>
+					</div>
+
+					<TextAreaField label="Content:" required />
+
+					<button style={{ marginTop: '1em' }} type="submit">
+						Post
+					</button>
+				</form>
+
+			</div>
+		</div>
   );
 };
 

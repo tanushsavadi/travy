@@ -75,6 +75,7 @@ nav a:hover {
 
 body {
   margin-top: 60px; /* To make room for the fixed navbar */
+}
 
 .submit-btn {
   background-color: #242424;

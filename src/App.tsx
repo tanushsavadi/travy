@@ -11,15 +11,6 @@ import { AuthProvider } from "./context/AuthContext";
 
 import './App.css';
 
-function Home() {
-  return (
-    <div>
-      <h2>Home Page</h2>
-      <p>Welcome to the home page!</p>
-    </div>
-  );
-}
-
 function Profile() {
   return (
     <div>
