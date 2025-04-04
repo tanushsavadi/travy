@@ -25,7 +25,7 @@ const getTransportIcon = (transport: string) => {
 
 const TransportOptions: React.FC<TransportOptionsProps> = ({filters}) => {
 
-    const filteredData = React.useMemo(() => {
+    const filteredData: RideOption[] = React.useMemo(() => {
       return rideData.filter(item =>
         item.destination === filters.location &&
         filters.transport.includes(item.transport) &&
