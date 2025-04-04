@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Map from '../components/Map';
 import Filter from '../components/Filter';
-import TransportOptions from '../components/TransportOptions';
 import '../common/InputField.css';
 import { useNavigate } from "react-router-dom";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { mockLocations } from '../data/MockLocations';
 import { DummyProfile } from '../data/dummyUserProfile';
+
+const TransportOptions = React.lazy(() => import('../components/TransportOptions'));
 
 interface FilterOptions {
   location: string;
@@ -33,6 +34,7 @@ const Home: React.FC = () => {
     price: { min: 0, max: 1000 },
     travelTime: { minHours: 0, maxHours: 24 }
   });
+  const [submitted, setSubmitted] = React.useState(false);
 
 
   const handleSubmit = () => {
@@ -46,6 +48,7 @@ const Home: React.FC = () => {
       ...prevFilters,
       location: loc,
     }));
+    setSubmitted(true);
   };
 
   return (
@@ -92,13 +95,24 @@ const Home: React.FC = () => {
           renderInput={(params) => <TextField {...params} label="Enter Location" />}
           onChange={(e, value) => setInputValue(value || '')}
         />
+
         <div style={{ margin: 'auto', width: '100%', maxWidth: '600px' }}>
           <Filter filters={filters} setFilters={setFilters} />
         </div>
+        
         <button className="submit-btn" onClick={handleSubmit}>Submit</button>
-        <div style={{ margin: '1rem auto', width: '100%', maxWidth: '600px' }}>
-          <TransportOptions filters={filters} />
-        </div>
+
+        {/* Lazy-loaded TransportOptions with Suspense fallback */}
+        {
+        submitted && (
+          <div style={{ margin: '1rem auto', width: '100%', maxWidth: '600px' }}>
+            <Suspense fallback={<div className="loading">Loading...</div>}>
+              <TransportOptions filters={filters} />
+            </Suspense>
+          </div>
+        )
+        }
+        
       </div>
     </div>
   )
