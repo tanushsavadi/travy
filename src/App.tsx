@@ -1,33 +1,15 @@
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import Community from "./pages/community"; // Import the Community component
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import CreateProfile from "./pages/CreateProfile";
+import Profile from "./pages/Profile";
 import Home from "./pages/Home"; // dashboard
 import { UserProfileProvider } from "./context/UserProfileContext";
 import { AuthProvider } from "./context/AuthContext";
 
 import './App.css';
-
-function Home() {
-  return (
-    <div>
-      <h2>Home Page</h2>
-      <p>Welcome to the home page!</p>
-    </div>
-  );
-}
-
-function Profile() {
-  return (
-    <div>
-      <h2>Profile Page</h2>
-      <p>Welcome to the profile page!</p>
-    </div>
-  );
-}
 
 function App() {
 
@@ -38,7 +20,7 @@ function App() {
           <nav>
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/home">Home</Link>
               </li>
               <li>
                 <Link to="/community">Community</Link>

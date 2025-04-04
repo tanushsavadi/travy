@@ -10,7 +10,7 @@
 
 .tabs-container {
   height: calc(100% - 60px); 
-  margin: 0 auto;
+  margin: auto 120px;
   border: 10px solid #555;
   border-radius: 1em;
   padding: 1.5em;
