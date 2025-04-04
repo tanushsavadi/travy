@@ -2,8 +2,9 @@ import React from 'react';
 import './InputField.css';
 
 interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label?: string;
   type?: string;
+  placeholder?: string;
 }
 
 const InputContainerCSS: React.CSSProperties = {
@@ -14,11 +15,11 @@ const InputContainerCSS: React.CSSProperties = {
   justifyContent: "start"
 };
 
-const InputField: React.FC<InputFieldProps> = ({ label, type = 'text' }) => {
+const InputField: React.FC<InputFieldProps> = ({ label, type = 'text', placeholder="" }) => {
   return (
     <div style={InputContainerCSS}>
-      <label style={{alignSelf: 'start'}}>{label}</label>
-      <input className='input-field' type={type}/>
+      {label && <label style={{alignSelf: 'start'}}>{label}</label>}
+      <input className='input-field' type={type} placeholder={placeholder}/>
     </div>
   );
 };

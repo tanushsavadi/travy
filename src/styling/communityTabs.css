@@ -1,0 +1,82 @@
+.community-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.tabs-container {
+  height: calc(100% - 60px); 
+  margin: 0 auto;
+  border: 10px solid #555;
+  border-radius: 1em;
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  gap: 1em;
+}
+
+.tabs-header {
+  display: flex;
+  gap: 1em;
+}
+
+.tab {
+  flex: 1;
+  padding: 15px;
+  text-align: center;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 0.25em;
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: background-color 0.1s, color 0.1s;
+}
+
+.tab.active {
+  background-color: #666;
+}
+
+.tab:not(.active) {
+  background-color: #333;
+}
+
+.tab span {
+  flex: 1;
+}
+
+.create-post-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-post-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+  min-height: 300px;
+  background-color: #111;
+  border-radius: 1em;
+  flex: 1;
+  overflow-y: auto; 
+}

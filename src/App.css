@@ -39,6 +39,43 @@
   color: #888;
 }
 
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333; /* Dark background color */
+  padding: 10px 0; /* Add padding to the navbar */
+  z-index: 1000; /* Ensures the navbar stays on top of other content */
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center; /* Center align the nav links */
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  margin: 0 20px; /* Space between each nav link */
+}
+
+nav a {
+  color: white; /* White text color */
+  text-decoration: none; /* Remove underline */
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #f0a500; /* Change color on hover */
+}
+
+body {
+  margin-top: 60px; /* To make room for the fixed navbar */
+
 .submit-btn {
   background-color: #242424;
   color: #fff;

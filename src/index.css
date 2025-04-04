@@ -19,6 +19,11 @@
 }
 
 
+body {
+  margin: 0;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
 /* Custom styling for inputs */
 .input-field {
   @apply w-full outline-none px-2 text-gray-700;
