@@ -49,11 +49,10 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="text-white flex flex-col items-center justify-center h-screen">
+    <div className="text-white">
       <div
         style={{
           position: 'relative',
-          height: '300px',
           overflow: 'hidden',
           width: '60%',
           margin: 'auto',
@@ -65,18 +64,16 @@ const Home: React.FC = () => {
       <div
         style={{
           overflowY: 'auto',
-          maxHeight: 'calc(100vh - 300px)',
           width: '80%',
           margin: '0 auto',
-          padding: '1rem',
           textAlign: 'center',
           ...(window.innerWidth <= 768 && { width: '100%' })
         }}
       >
         {currentUser && 
-          <h1 className="text-3xl font-bold mb-4">Welcome {currentUser.fullName}</h1>
+          <h1 className="text-xl sm:text-3xl font-bold mb-1">Welcome {currentUser.fullName}</h1>
         }
-        <p className="mb-4">Enter your destination to find rides!</p>
+        <p className="mb-4 text-md">Enter your destination to find rides!</p>
         <Autocomplete
           disablePortal
           options={locationNames}
@@ -98,7 +95,7 @@ const Home: React.FC = () => {
         <div style={{ margin: 'auto', width: '100%', maxWidth: '600px' }}>
           <Filter filters={filters} setFilters={setFilters} />
         </div>
-        <button className="submit-btn" onClick={handleSubmit} style={{ margin: '1rem auto' }}>Submit</button>
+        <button className="submit-btn" onClick={handleSubmit}>Submit</button>
         <div style={{ margin: '1rem auto', width: '100%', maxWidth: '600px' }}>
           <TransportOptions filters={filters} />
         </div>

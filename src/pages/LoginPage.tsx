@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import { useAuth } from "@/context/AuthContext";
@@ -12,6 +12,14 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("userProfile");
+    if (storedUser) {
+      navigate("/home");
+    }
+  }
+  , [navigate]);
 
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();

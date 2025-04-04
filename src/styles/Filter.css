@@ -44,4 +44,28 @@
     background-color: white;
     color: black;
   }
-  
+
+@media (max-width: 768px) {
+  .filter-option {
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 15px;
+  }
+
+  .filter-container {
+    gap: 5px;
+  }
+}
+
+.price-slider {
+  max-width: 300px;
+  margin: 0;
+  padding-bottom: 0 !important;
+  color: #5fc798 !important;
+}
+
+@media screen and (max-width: 400px) {
+  .price-slider {
+    max-width: 250px;
+  }
+}

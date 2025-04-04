@@ -85,17 +85,17 @@ body {
   border: 1px solid white;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin: 0.5em 0;
 }
 
 .map-container {
-  height: 300px;
-  width: 1000px;
+  height: 270px;
+  max-width: 1000px;
   z-index: 0;
 }
 
 @media screen and (max-width: 768px) {
   .map-container {
     width: 100%;
+    height: 250px;
   }
 }

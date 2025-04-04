@@ -54,7 +54,11 @@ const Map: React.FC<MapProps> = ({ destination, setDestination }) => {
         };
         const isSmallScreen = window.innerWidth <= 768;
         return (
-            <button onClick={resetMap} style={{ color: 'black', position: 'absolute', bottom: '10px', right: isSmallScreen ? '5px' : '110px', zIndex: 1000, cursor: 'pointer' }}>
+            <button 
+                onClick={resetMap} 
+                className="bg-green-300 hover:bg-green-500 text-white font-bold py-1 px-3 rounded-full" 
+                style={{ color: 'black', position: 'absolute', bottom: '10px', right: isSmallScreen ? '5px' : '1em', zIndex: 1000, cursor: 'pointer' }}
+            >    
                 Reset Map
             </button>
         );
@@ -66,7 +70,7 @@ const Map: React.FC<MapProps> = ({ destination, setDestination }) => {
                 center={UMassCoords}
                 zoom={12}
                 scrollWheelZoom={true}
-                className="map-container"
+                className="map-container rounded-xl"
             >
                 <TileLayer
                     url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"

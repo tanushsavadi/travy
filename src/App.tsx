@@ -17,7 +17,7 @@ function App() {
      <AuthProvider>
       <UserProfileProvider>
         <Router>
-          <nav>
+          <nav style={{height: "50px"}}>
             <ul>
               <li>
                 <Link to="/home">Home</Link>
