@@ -49,7 +49,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    // TODO: Add logout button
+
     <div className="text-white flex flex-col items-center justify-center h-screen">
       <div style={{ position: 'relative', height: '300px', overflow: 'hidden', width: '60%', margin: 'auto' }}>
         <Map destination={destination} setDestination={setDestination} />

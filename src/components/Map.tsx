@@ -48,7 +48,7 @@ const DestinationMarker: React.FC<{ destination: string }> = ({ destination }) =
     );
 };
 
-const MyMap: React.FC<MapProps> = ({ destination, setDestination }) => {
+const Map: React.FC<MapProps> = ({ destination, setDestination }) => {
 
     const ResetButton: React.FC = () => {
         const mapRef = useMap()
@@ -89,4 +89,4 @@ const MyMap: React.FC<MapProps> = ({ destination, setDestination }) => {
     );
 };
 
-export default MyMap;
+export default Map;
