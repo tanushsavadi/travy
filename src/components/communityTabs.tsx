@@ -76,7 +76,7 @@ const SimpleTabs: React.FC = () => {
 
       <SearchBar
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
         placeholder={`Search ${activeTab}...`}
       />
 

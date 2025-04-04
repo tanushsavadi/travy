@@ -93,7 +93,7 @@ const Home: React.FC = () => {
           }}
           className="input-field mb-2"
           renderInput={(params) => <TextField {...params} label="Enter Location" />}
-          onChange={(e, value) => setInputValue(value || '')}
+          onChange={(_, value) => setInputValue(value || '')}
         />
 
         <div style={{ margin: 'auto', width: '100%', maxWidth: '600px' }}>

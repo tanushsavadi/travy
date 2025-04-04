@@ -101,7 +101,7 @@ const Filter: React.FC<FilterProps> = ({ filters, setFilters }) => {
           <br />
           <Slider
             value={values}
-            onChange={(event, newValue) => {
+            onChange={(_, newValue) => {
               setValues(newValue as number[]);
               setFilters((prevFilters) => ({
                 ...prevFilters,

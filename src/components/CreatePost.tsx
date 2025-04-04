@@ -6,6 +6,7 @@ import "../styling/CreatePost.css";
 
 interface CreatePostProps {
   onClose: () => void;
+  onCreate: (newPost: {title: string}) => void;
   activeTab: "offers" | "requests";
 }
 
