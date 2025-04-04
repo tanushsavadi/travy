@@ -1,0 +1,63 @@
+.transport-option {
+    list-style-type: none;
+}
+
+.rides-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+  
+.ride-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 12px 16px;
+    margin: 0 3.5em;
+    border-radius: 10px;
+    border: 1px solid #444;
+    color: white;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ride-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
+}
+
+@media screen and (max-width: 768px) {
+    .ride-card {
+        margin: 0;
+    }
+}
+
+.ride-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.transport-icon {
+    font-size: 20px;    
+}
+
+.ride-details { 
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+}
+
+.price {
+    color: #5fc798;
+    font-weight: bold;
+}
+
+.time {
+    color: #ffcc00;
+}
