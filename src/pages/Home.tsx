@@ -49,12 +49,30 @@ const Home: React.FC = () => {
   };
 
   return (
-
     <div className="text-white flex flex-col items-center justify-center h-screen">
-      <div style={{ position: 'relative', height: '300px', overflow: 'hidden', width: '60%', margin: 'auto' }}>
+      <div
+        style={{
+          position: 'relative',
+          height: '300px',
+          overflow: 'hidden',
+          width: '60%',
+          margin: 'auto',
+          ...(window.innerWidth <= 768 && { width: '100%', margin: '0'})
+        }}
+      >
         <Map destination={destination} setDestination={setDestination} />
       </div>
-      <div style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 300px)', width: '80%', margin: '0 auto', padding: '1rem', textAlign: 'center' }}>
+      <div
+        style={{
+          overflowY: 'auto',
+          maxHeight: 'calc(100vh - 300px)',
+          width: '80%',
+          margin: '0 auto',
+          padding: '1rem',
+          textAlign: 'center',
+          ...(window.innerWidth <= 768 && { width: '100%' })
+        }}
+      >
         {currentUser && 
           <h1 className="text-3xl font-bold mb-4">Welcome {currentUser.fullName}</h1>
         }
@@ -63,7 +81,11 @@ const Home: React.FC = () => {
           disablePortal
           options={locationNames}
           sx={{
-            width: 300, margin: '0 auto', padding: 0, textColor: 'white', marginBottom: '0.75rem',
+            width: 300,
+            margin: '0 auto',
+            padding: 0,
+            textColor: 'white',
+            marginBottom: '0.75rem',
             '& label': { color: 'white' },
             '& label.Mui-focused': { color: 'white' },
             '.MuiAutocomplete-input': { color: 'white' },

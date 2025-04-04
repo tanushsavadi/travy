@@ -9,3 +9,9 @@
 .input-field:focus {
   outline: 1px solid #888888; /* keeps the same border color on focus */
 }
+
+@media (max-width: 768px) {
+  .input-field {
+    width: 90%; /* Adjust width for smaller screens */
+  }
+}

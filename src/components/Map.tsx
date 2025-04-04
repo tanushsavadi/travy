@@ -6,14 +6,8 @@ import * as L from 'leaflet';
 
 import { mockLocations } from "../data/MockLocations";
 
+
 const UMassCoords: LatLngTuple = [42.386487, -72.531481]; // UMass Amherst coordinates
-
-const MapContainerCSS: React.CSSProperties = {
-    height: "300px",
-    width: "1000px",
-    zIndex: 0
-};
-
 
 interface MapProps {
     destination: string;
@@ -58,9 +52,9 @@ const Map: React.FC<MapProps> = ({ destination, setDestination }) => {
                 if (setDestination) setDestination(''); // Reset destination
             }
         };
-
+        const isSmallScreen = window.innerWidth <= 768;
         return (
-            <button onClick={resetMap} style={{ color: 'black', position: 'absolute', bottom: '10px', right: '110px', zIndex: 1000, cursor: 'pointer' }}>
+            <button onClick={resetMap} style={{ color: 'black', position: 'absolute', bottom: '10px', right: isSmallScreen ? '5px' : '110px', zIndex: 1000, cursor: 'pointer' }}>
                 Reset Map
             </button>
         );
@@ -72,7 +66,7 @@ const Map: React.FC<MapProps> = ({ destination, setDestination }) => {
                 center={UMassCoords}
                 zoom={12}
                 scrollWheelZoom={true}
-                style={MapContainerCSS}
+                className="map-container"
             >
                 <TileLayer
                     url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
