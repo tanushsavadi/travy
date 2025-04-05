@@ -100,6 +100,7 @@ const Filter: React.FC<FilterProps> = ({ filters, setFilters }) => {
           </label>
           <br />
           <Slider
+            aria-label="Price Range"
             value={values}
             onChange={(_, newValue) => {
               setValues(newValue as number[]);

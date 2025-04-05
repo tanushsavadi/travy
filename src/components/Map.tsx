@@ -57,7 +57,7 @@ const Map: React.FC<MapProps> = ({ destination, setDestination }) => {
             <button 
                 onClick={resetMap} 
                 className="bg-green-300 hover:bg-green-500 text-white font-bold py-1 px-3 rounded-full" 
-                style={{ color: 'black', position: 'absolute', bottom: '10px', right: isSmallScreen ? '5px' : '1em', zIndex: 1000, cursor: 'pointer' }}
+                style={{ color: 'black', position: 'absolute', top: '10px', right: isSmallScreen ? '5px' : '1em', zIndex: 1000, cursor: 'pointer' }}
             >    
                 Reset Map
             </button>
