@@ -23,14 +23,13 @@
 - `items`: { id: string; label: string }[] – Checkbox items.
 - `onChange`: (selectedIds: string[]) => void – Handler for selection changes.
 
-**Actual Usage** (from /src/pages/Settings.tsx):
+**Actual Usage** (from /src/pages/CreateProfile.tsx):
 ```tsx
 <CheckboxGroup
-  items={[
-    { id: "notifications", label: "Enable Notifications" },
-    { id: "darkMode", label: "Dark Mode" }
-  ]}
-  onChange={(selectedIds) => updatePreferences(selectedIds)}
+  label="Preferred Transport Modes"
+  options={["Bus", "Train", "Flight", "Carpool"]}
+  selected={profile.transportModes}
+  setSelected={(modes) => updateProfile({ transportModes: modes })}
 />
 ```
 
@@ -43,7 +42,7 @@
 **Props**:
 - `onCreate`: (content: string) => void – Handler for post submission.
 
-**Actual Usage** (from /src/pages/Community.tsx):
+**Actual Usage** (from /src/components/communityTabs.tsx):
 ```tsx
 <CreatePost onCreate={(content) => addPost(content)} />
 ```
@@ -91,7 +90,7 @@
 - `value`: string – Controlled input value.
 - `onChange`: (value: string) => void – Input change handler.
 
-**Actual Usage** (from /src/pages/Register.tsx):
+**Actual Usage** (from /src/pages/RegisterPage.tsx):
 ```tsx
 <InputField
   placeholder="Email"
@@ -109,7 +108,7 @@
 **Props**:
 - `post`: { id: string; title: string } – Post data.
 
-**Actual Usage** (from /src/pages/Community.tsx):
+**Actual Usage** (from /src/components/communityTabs.tsx):
 ```tsx
 <ListedPost post={{ id: "1", title: "Travel Tips" }} />
 ```
@@ -123,7 +122,7 @@
 **Props**:
 - `coordinates`: { lat: number; lng: number } – Map center.
 
-**Actual Usage** (from /src/pages/TripDetails.tsx):
+**Actual Usage** (from /src/pages/Home.tsx):
 ```tsx
 <Map coordinates={{ lat: 51.505, lng: -0.09 }} />
 ```
@@ -151,7 +150,7 @@
 **Props**:
 - `onSearch`: (query: string) => void – Search handler.
 
-**Actual Usage** (from /src/pages/Explore.tsx):
+**Actual Usage** (from /src/components/communityTabs.tsx):
 ```tsx
 <SearchBar onSearch={(query) => searchDestinations(query)} />
 ```
@@ -166,7 +165,7 @@
 - `options`: string[] – Transport types (e.g., ["Car", "Train"]).
 - `onSelect`: (option: string) => void – Selection handler.
 
-**Actual Usage** (from /src/pages/NewTrip.tsx):
+**Actual Usage** (from /src/pages/Home.tsx):
 ```tsx
 <TransportOptions
   options={["Car", "Train", "Flight"]}
