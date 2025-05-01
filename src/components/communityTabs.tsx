@@ -23,9 +23,7 @@ const SimpleTabs: React.FC = () => {
     .filter(
       (post) =>
         post.destination.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.user.university
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase()) ||
+        post.user.university.toLowerCase().includes(searchQuery.toLowerCase()) ||
         post.content.toLowerCase().includes(searchQuery.toLowerCase())
     );
 

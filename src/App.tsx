@@ -5,6 +5,7 @@ import { UserProfileProvider } from "./context/UserProfileContext";
 import { AuthProvider } from "./context/AuthContext";
 import './App.css';
 
+
 // Lazy-load route components
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));

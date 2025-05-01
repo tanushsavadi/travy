@@ -17,7 +17,7 @@ const SelectContainerCSS: React.CSSProperties = {
 const SelectField: React.FC<SelectFieldProps> = ({ label, options }) => {
   return (
     <div style={SelectContainerCSS}>
-      <label style={{alignSelf: 'start'}}>{label}</label>
+      <label style={{alignSelf: 'center'}}>{label}</label>
       <select className='select-field'>
         {options.map((option) => (
           <option key={option} value={option}>
