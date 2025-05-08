@@ -15,11 +15,21 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("userProfile");
-    if (storedUser) {
+    const storedUserRaw = localStorage.getItem("userProfile");
+    const storedUser = storedUserRaw ? JSON.parse(storedUserRaw) : null;
+
+    if (
+      storedUser &&
+      storedUser.email &&
+      storedUser.fullName &&
+      storedUser.university &&
+      storedUser.budget &&
+      Array.isArray(storedUser.transportModes) &&
+      storedUser.transportModes.length > 0
+    ) {
       navigate("/home");
     }
-  }, [navigate]);
+  }, [navigate]); 
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();

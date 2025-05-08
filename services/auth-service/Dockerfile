@@ -4,6 +4,7 @@ WORKDIR /app
 COPY . .
 RUN npm install
 RUN npm install --save-dev @types/express
+RUN npm install --save-dev @types/cors
 RUN npm run build
 CMD ["npm", "start"]
 EXPOSE 5002
