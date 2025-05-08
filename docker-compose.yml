@@ -4,3 +4,12 @@ services:
     ports:
       - "3000:80"
     restart: unless-stopped
+  
+  auth-service:
+    build: ./services/auth-service
+    ports:
+      - "5002:5002"
+    environment:
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+
