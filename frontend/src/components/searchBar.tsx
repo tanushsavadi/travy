@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styling/SearchBar.css";
+import "../styling/searchBar.css";
 
 interface SearchBarProps {
   value: string;

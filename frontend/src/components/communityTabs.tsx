@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styling/CommunityTabs.css";
+import "../styling/communityTabs.css";
 import createPostIcon from "../assets/createPost.png";
 import CreatePost from "./CreatePost";
 import SearchBar from "./searchBar";

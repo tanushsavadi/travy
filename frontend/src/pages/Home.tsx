@@ -32,7 +32,7 @@ const Home: React.FC = () => {
     location: '',
     transport: ['Car', 'Bus', 'Train', 'Flight'],
     price: { min: 0, max: 1000 },
-    travelTime: { minHours: 0, maxHours: 24 }
+    travelTime: { minHours: 0, maxHours: 10000 }
   });
   const [submitted, setSubmitted] = React.useState(false);
 
@@ -107,7 +107,7 @@ const Home: React.FC = () => {
         submitted && (
           <div style={{ margin: '1rem auto', width: '100%', maxWidth: '600px' }}>
             <Suspense fallback={<div className="loading">Loading...</div>}>
-              <TransportOptions filters={filters} />
+              <TransportOptions filters={filters} destination={destination} />
             </Suspense>
           </div>
         )

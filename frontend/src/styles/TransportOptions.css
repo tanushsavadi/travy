@@ -47,6 +47,11 @@
     font-size: 20px;    
 }
 
+.transport-logo {
+    width: 15%;
+    height: auto;
+}
+
 .ride-details { 
     display: flex;
     gap: 15px;
@@ -60,4 +65,17 @@
 
 .time {
     color: #ffcc00;
+}
+
+
+.ride-steps {
+  margin-top: 10px;
+  padding-left: 15px;
+  border-top: 1px solid #444;
+}
+
+.ride-step {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #ccc;
 }
