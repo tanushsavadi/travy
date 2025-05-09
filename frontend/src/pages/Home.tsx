@@ -18,14 +18,18 @@ interface FilterOptions {
 }
 
 const Home: React.FC = () => {
+  // Retrieve user profile from local storage
   const currentUser: DummyProfile = JSON.parse(localStorage.getItem('userProfile') || '{}');
   const navigate = useNavigate();
-
+  // Redirect to login if no user profile is found
   if (!currentUser) {
     navigate('/login');
   }
+
+  // Get all supported locations
   const locationNames = mockLocations.map(location => location.name);
 
+  // React state hooks for destination selection and filtering
   const [destination, setDestination] = React.useState<string>('');
   const [inputValue, setInputValue] = React.useState<string>('');
   const [filters, setFilters] = React.useState<FilterOptions>({
@@ -36,7 +40,7 @@ const Home: React.FC = () => {
   });
   const [submitted, setSubmitted] = React.useState(false);
 
-
+  // Handle form submission
   const handleSubmit = () => {
     const loc = inputValue;
     if (!loc) {
@@ -64,6 +68,7 @@ const Home: React.FC = () => {
       >
         <Map destination={destination} setDestination={setDestination} />
       </div>
+      {/* User Greeting and Input Section */}
       <div
         style={{
           overflowY: 'auto',

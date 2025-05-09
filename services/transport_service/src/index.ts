@@ -16,6 +16,7 @@ const travelOptionsSchema = z.object({
   destination: z.string().min(3, "Destination must be at least 3 characters long"),
 });
 
+// Define the coordinates for each location
 const locationLatLng = {
   NYC: { lat: 40.712776, lng: -74.005974 },
   BOS: { lat: 42.386487, lng: -72.531481 }, // UMass
@@ -26,7 +27,7 @@ const locationLatLng = {
   ORD: { lat: 41.974162, lng: -87.907321 },
 };
 
-
+// get airport codes from location names
 const locationToIdMap: { [key: string]: string } = {
     "New York City, NY": "NYC",
     "Boston, MA": "BOS",
@@ -37,7 +38,7 @@ const locationToIdMap: { [key: string]: string } = {
     "Chicago, IL": "ORD"
 };
 
-
+// main API endpoint to get travel options
 app.post("/travel-options", async (req: Request, res: Response) => {
 
   try {
@@ -60,7 +61,6 @@ app.post("/travel-options", async (req: Request, res: Response) => {
       ...rideSharingData,
     ]
 
-    console.log("Travel options:", travelOptions);
      
     res.json(travelOptions);
 
@@ -73,10 +73,14 @@ app.post("/travel-options", async (req: Request, res: Response) => {
   }
 });
 
+// Fetch flight data from the API
 async function getFlightData(source: string, destination: string) {
   source = locationToIdMap[source] || source;
   destination = locationToIdMap[destination] || destination;
+  // get tomorrow's date in YYYY-MM-DD format
   const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().split("T")[0];
+  
+  // format the URL
   const url = `https://booking-com15.p.rapidapi.com/api/v1/flights/searchFlights?fromId=${source}.AIRPORT&toId=${destination}.AIRPORT&departDate=${tomorrow}&stops=none&pageNo=1&adults=1&sort=BEST&cabinClass=ECONOMY&currency_code=USD`;
 
   const options = {
@@ -112,6 +116,7 @@ async function getFlightData(source: string, destination: string) {
     data.data.flightOffers.slice(0, 3).map((offer: any) => {
         let minPrice = offer.priceBreakdown?.total.units;
         let flight = offer.segments?.map((segment: any) => {
+          // return it in the expected format
           return {
             transport: "Flight",
             name: segment.legs[0]?.carriers[0] + " " + segment.legs[0]?.flightInfo?.flightNumber,
@@ -142,6 +147,7 @@ type TransitInfo = {
   destination: string;
 };
 
+// Extract transit information from the Google Maps API response
 function extractTransitInfo(data: any): TransitInfo[] {
   const entries: TransitInfo[] = [];
 
@@ -168,6 +174,7 @@ function extractTransitInfo(data: any): TransitInfo[] {
   return entries;
 }
 
+// Fetch transit data from the Google Maps API
 async function getTransitData(source: string, destination: string) {
   const url = new URL('https://maps.googleapis.com/maps/api/directions/json');
   url.searchParams.append('origin', source);
@@ -192,8 +199,6 @@ async function getTransitData(source: string, destination: string) {
 
 async function getRideSharingData(source: string, destination: string) {
   // Replace with actual API call later, no way to get Uber data now
-  console.log("Fetching ride sharing data...");
-  console.log(destination);
   const uberData = [
     {
       transport: "Car",
@@ -253,14 +258,6 @@ async function getRideSharingData(source: string, destination: string) {
     },
   ];
 
-  console.log(
-    "filter",
-    uberData.filter((ride) => {
-      return ride.destination.trim() === destination.trim();
-    })
-  );
-
-  console.log(uberData);
   return uberData.filter((ride) => {
     return ride.destination.trim() === destination.trim();
   });

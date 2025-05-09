@@ -17,6 +17,7 @@ interface MapProps {
 const DestinationMarker: React.FC<{ destination: string }> = ({ destination }) => {
     const mapRef = useMap();
     useEffect(() => {
+        // update map coodinates to fit the destination marker
         if (destination && mapRef) {
             const foundLocation = mockLocations.find(location => location.name === destination.toString());
             if (foundLocation) {
@@ -43,7 +44,7 @@ const DestinationMarker: React.FC<{ destination: string }> = ({ destination }) =
 };
 
 const Map: React.FC<MapProps> = ({ destination, setDestination }) => {
-
+    // add reset button to the map
     const ResetButton: React.FC = () => {
         const mapRef = useMap()
         const resetMap = () => {
@@ -64,6 +65,7 @@ const Map: React.FC<MapProps> = ({ destination, setDestination }) => {
         );
     };
 
+    // display main map container
     return (
         <div>
             <MapContainer
