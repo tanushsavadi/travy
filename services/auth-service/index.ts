@@ -13,6 +13,6 @@ app.use(express.json());
 app.use("/auth", authRoutes); // using the exported router
 app.use("/permissions", permissionsRoutes);
 
-app.listen(5002, () => {
+app.listen(3007, () => {
   console.log("Auth service running on port 5002");
 });
